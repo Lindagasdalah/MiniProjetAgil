@@ -20,13 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authentification" />
-        <activity
-            android:name=".MenuAccueil"
-            android:label="@string/title_activity_menu_accueil"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".menuAccueil">
-        </activity>
+        <activity android:name=".AjouterClient" />
+
     </application>
 
 </manifest>
