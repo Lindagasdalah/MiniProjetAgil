@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Agil.iml" filepath="$PROJECT_DIR$/Agil.iml" />
       <module fileurl="file://$PROJECT_DIR$/MiniProjetAgil.iml" filepath="$PROJECT_DIR$/MiniProjetAgil.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MiniProjetAgil.iml" filepath="$PROJECT_DIR$/MiniProjetAgil.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

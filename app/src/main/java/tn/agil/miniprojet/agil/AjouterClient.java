@@ -1,11 +1,16 @@
 package tn.agil.miniprojet.agil;
 
-import android.support.v7.app.AppCompatActivity;
+/**
+ * Created by Linda on 25/10/2017.
+ */
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 
 
 public class AjouterClient extends AppCompatActivity {
