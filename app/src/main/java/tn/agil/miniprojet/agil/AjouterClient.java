@@ -5,161 +5,161 @@ package tn.agil.miniprojet.agil;
  */
 
 
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import org.apache.http.client.HttpClient;
+import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.Menu;
 
-public class AjouterClient extends AppCompatActivity {
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class AjouterClient extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener  {
+
+    private EditText cin;
     private EditText nom;
     private EditText prenom;
     private EditText tel;
-    private Button btn;
+    private Button btnajouter;
     private EditText qte;
-    private Spinner spinner;
-    private TextView indicator;
-    private TextView indicator2;
 
+    Spinner spinner;
+    RequestQueue requestQueue;
+   /* //// array list for spinner adapter
+    InputStream is = null;
+    String result="";
+    String line=null;
+    String[] name;
     ArrayList<String> listItems =new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter;*/
 
+    String insertUrl="http://192.168.1.5/5edma/insertion.php";
+    //String affichUrl="http://192.168../5edma/affiche.php";
+
+    String[] produit = { "TANIX 4WD SAE 15W50", "ENI I-SINT 5W40", "ENI I-SINT 10W40", "TANIX SUPER 1100 SAE 20W50"
+            , "TANIX SUPER 700 SAE 20W50"};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_client);
+        cin = (EditText) findViewById(R.id.editCin);
         nom = (EditText) findViewById(R.id.editN);
         prenom = (EditText) findViewById(R.id.editP);
         tel = (EditText) findViewById(R.id.editT);
-        spinner = (Spinner) findViewById(R.id.prodList);
-        adapter=new ArrayAdapter<String>(this, R.layout.spinner_layout, R.id.txt, listItems);
-        spinner.setAdapter(adapter);
-        qte=(EditText) findViewById(R.id.editQte) ;
-        btn = (Button) findViewById(R.id.btnAjout);
-        indicator = (TextView) findViewById(R.id.indicator);
-        btn.setOnClickListener(new OnClickListener());
+        spinner = (Spinner) findViewById(R.id.prodList);// define spinner
+        spinner.setOnItemSelectedListener(this);
+        //Creating the ArrayAdapter instance having the produit list
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,produit);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        qte = (EditText) findViewById(R.id.editQte);
+        btnajouter = (Button) findViewById(R.id.btnAjout);
+        btnajouter.setOnClickListener(new OnClickListener());
+
+        //Setting the ArrayAdapter data on the Spinner
+        spinner.setAdapter(aa);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Toast.makeText(getApplicationContext(),produit[i] ,Toast.LENGTH_LONG).show();
 
     }
 
-    protected void onStart()
-    {
-        super.onStart();
-        BackTask bt= new BackTask();
-        bt.execute();
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
-
-    private class BackTask extends AsyncTask< Void , Void , Void >
-    {
-        ArrayList<String> list ;
-        protected  void  onPreExecute()
-        {
-            super.onPreExecute();
-            list= new ArrayList<>();
-
-        }
-
-        protected Void doInBackground (Void...params)
-        {
-            InputStream is = null;
-            String result="";
-            try{
-                HttpClient httpClient;
-                httpClient = new DefaultHttpClient();
-                HttpPost httpPost= new HttpPost("http://192.168.1.5/test/all.php ");
-                HttpResponse response=httpClient.execute(httpPost);
-                HttpEntity entity= response.getEntity();
-                is=entity.getContent();
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            // convert the response to string
-            try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is,"utf-8"));
-                String line="";
-                while ((line=bufferedReader.readLine())!=null){
-                    result+=line;
-                }
-                is.close();
-            }catch (IOException e){e.printStackTrace(); }
-
-            // Parse json String
-            try{
-                JSONArray jsonArray =new JSONArray(result);
-                for (int i=0; i<jsonArray.length();i++)
-                {
-                    JSONObject jsonObject= jsonArray.getJSONObject(i);
-                    list.add(jsonObject.getString("iname"));
-                }
-            }catch (JSONException e){e.printStackTrace();}
-            return null;
-        }
-
-        protected  void  onPostExecute (Void result) {
-            listItems.addAll(list);
-            adapter.notifyDataSetChanged();
-
-        }
-    }
-
-
-
 
 
     private class OnClickListener implements View.OnClickListener
     {
         public void onClick (View v)
         {
-            if((nom.getText().length()==0) && (prenom.getText().length()==0) && (tel.getText().length()==0)&& (qte.getText().length()==0))
-            {
-                indicator.setText(" * Champs Obligatoire ");
-            }
-            else if((nom.getText().length()==0) )
-            {
-                indicator.setText(" * Inseret le Nom  ");
-            }
-            else if((prenom.getText().length()==0) )
-            {
-                indicator.setText(" * Inseret le Prenom  ");
-            }
-            else if((tel.getText().length()==0) )
-            {
-                indicator.setText(" * Inseret le N°tel  ");
-            }
+            String cinStr= cin.getText().toString();
+            String nomStr= nom.getText().toString();
+            String prenomStr= prenom.getText().toString();
+            String telStr= tel.getText().toString();
+            String prodStr= spinner.getAccessibilityClassName().toString();
+            String qteStr= qte.getText().toString();
 
 
-            else if((qte.getText().length()==0) )
+            if ((cinStr.isEmpty())||(nomStr.isEmpty())||(prenomStr.isEmpty())||(telStr.isEmpty())||
+                    (prodStr.isEmpty())||(qteStr.isEmpty()))
             {
-                indicator.setText(" * Inseret la quantité   ");
+                Toast.makeText(AjouterClient.this,"Champs Vides !!",Toast.LENGTH_SHORT).show();
             }
+            else{
 
-            else
+                insertDataOnline();}
+
+        }
+
+        private void insertDataOnline() {
+            StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+
+            })
             {
-                indicator.setText(" !! ");
-            }
+                protected Map<String,String> getParam() throws AuthFailureError {
+                    Map<String,String> parametres = new HashMap<String, String>();
+                    parametres.put("Cin",cin.getText().toString());
+                    parametres.put("Nom",nom.getText().toString());
+                    parametres.put("Prenom",prenom.getText().toString());
+                    parametres.put("Produit",spinner.getAccessibilityClassName().toString());
+                    parametres.put("tel",tel.getText().toString());
+                    parametres.put("qte",qte.getText().toString());
+                    return parametres;
+
+
+                }
+            };
+            requestQueue.add(request);
         }
     }
 }

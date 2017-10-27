@@ -26,7 +26,7 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
     EditText log, pass;
     boolean exist=false;
     RequestQueue requestQueue;
-    String showUrl="http://192.168.1.5/test/showStudents.php";
+    String showUrl="http://192.168.1.5/5edma/logine.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +74,9 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
                     JSONArray users = response.getJSONArray("users");
 
                     for (int i = 0; i < users.length(); i++) {
-                        JSONObject user = users.getJSONObject(i);
-                        String testL = user.getString("login");
-                        String testM = user.getString("password");
+                            JSONObject user = users.getJSONObject(i);
+                            String testL = user.getString("login");
+                            String testM = user.getString("password");
 
                         if(testL.equals(l) && testM.contentEquals(m)) {
                             exist = true;

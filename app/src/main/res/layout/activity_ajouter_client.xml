@@ -6,21 +6,59 @@
     android:layout_height="match_parent"
     android:baselineAligned="true"
     android:orientation="vertical"
-    tools:context="tn.agil.miniprojet.agil.AjouterClient">
+    tools:context="tn.agil.miniprojet.agil.AjouterClient"
+    android:weightSum="7"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:weightSum="2">
 
+        <TextView
+            android:id="@+id/Cin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8dp"
+            android:padding="16dp"
+            android:paddingBottom="8dp"
+            android:text="Cin : " />
+
+        <EditText
+            android:id="@+id/editCin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:maxLength="8"
+            android:digits="0123456789"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textSize="13sp"
+            android:hint="Saisie le N° cin "
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:weightSum="2">
 
         <TextView
             android:id="@+id/nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
+            android:layout_weight="1"
             android:padding="16dp"
             android:paddingBottom="8dp"
             android:text="Nom : " />
@@ -30,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
+            android:layout_weight="1"
             android:paddingTop="8dp"
             android:textSize="13sp"
             android:hint="Saisie le nom"
@@ -43,11 +82,13 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
         android:orientation="vertical"
-        >
+        android:layout_weight="1"
+        android:weightSum="2">
         <TextView
             android:id="@+id/Prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Prenom  : "
             android:padding="16dp"
             android:paddingBottom="8dp"
@@ -58,6 +99,7 @@
             android:id="@+id/editP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:textSize="13sp"
@@ -70,11 +112,14 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
         android:orientation="vertical"
+        android:layout_weight="1"
+        android:weightSum="2">
         >
         <TextView
             android:id="@+id/tel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="N° Telephone : "
             android:padding="16dp"
             android:paddingBottom="8dp"
@@ -84,13 +129,14 @@
             android:id="@+id/editT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:textSize="13sp"
             android:inputType="phone"
-            android:hint="Saisie le N° Tel"
             android:maxLength="8"
-            android:digits="0123456789"/>
+            android:digits="0123456789"
+            android:hint="Saisie le N° Tel"/>
     </LinearLayout>
 
     <LinearLayout
@@ -99,20 +145,26 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
         android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="2">
         >
         <TextView
             android:id="@+id/prod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Produit : "
+            android:layout_weight="1"
             android:padding="16dp"
             android:paddingBottom="8dp"
             android:lineSpacingExtra="8dp" />
-//Liste déroulante
+
         <Spinner
             android:id="@+id/prodList"
             android:layout_width="123dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" >
 
         </Spinner>
     </LinearLayout>
@@ -123,11 +175,14 @@
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp"
         android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="2">
         >
         <TextView
             android:id="@+id/qte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Quantité : "
             android:padding="16dp"
             android:paddingBottom="8dp"
@@ -137,6 +192,7 @@
             android:id="@+id/editQte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:textSize="13sp"
@@ -146,50 +202,18 @@
             android:digits="0123456789"/>
     </LinearLayout>
 
-    <LinearLayout
+
+
+    <Button
+        android:id="@+id/btnAjout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:layout_marginLeft="260dp"
+        android:text="Ajouter" />
 
-        <CheckBox
-            android:id="@+id/check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp" />
 
-        <TextView
-            android:id="@+id/ajout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ajouter" />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnAjout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="260dp"
-            android:text="Ajouter" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:paddingBottom="8dp"
-            android:lineSpacingExtra="8dp"
-
-            android:textColor="@color/textcolor" />
-    </LinearLayout>
 
 </LinearLayout>
