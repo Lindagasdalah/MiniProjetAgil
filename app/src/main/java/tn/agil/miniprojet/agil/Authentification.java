@@ -26,7 +26,7 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
     EditText log, pass;
     boolean exist=false;
     RequestQueue requestQueue;
-    String showUrl="http://192.168.1.7/test/loginGerant.php";
+    String showUrl="http://192.168.137.1/test/loginGerant.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
